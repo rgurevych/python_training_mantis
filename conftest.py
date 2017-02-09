@@ -2,7 +2,6 @@
 import pytest
 import json
 import os.path
-import importlib
 from fixture.application import Application
 
 
@@ -21,10 +20,12 @@ def loadconfig(file):
 def app(request):
     global fixture
     browser = request.config.getoption("--browser")
-    web_config = loadconfig(request.config.getoption("--target"))["web"]
+    base_url = loadconfig(request.config.getoption("--target"))["web"]["baseURL"]
+    credentials = loadconfig(request.config.getoption("--target"))["webadmin"]
     if fixture is None or not fixture.is_valid():
-        fixture = Application(browser=browser, base_url=web_config["baseURL"])
-    #fixture.session.ensure_login(username=web_config["username"], password=web_config["password"])
+        fixture = Application(browser=browser, base_url=base_url)
+    #fixture.session.login(username=credentials["username"], password=credentials["password"])
+    fixture.session.ensure_login(username=credentials["username"], password=credentials["password"])
     return fixture
 
 

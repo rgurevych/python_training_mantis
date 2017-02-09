@@ -19,8 +19,8 @@ class SessionHelper:
 
     def logout(self):
         wd = self.app.wd
-        wd.find_element_by_xpath("//i[@class='ace-icon fa fa-angle-down']").click()
-        wd.find_element_by_link_text("Logout").click()
+        wd.find_element_by_css_selector("span.user-info").click()
+        wd.find_element_by_css_selector("i.ace-icon.fa-sign-out").click()
 
 
     def ensure_logout(self):
@@ -31,7 +31,7 @@ class SessionHelper:
 
     def is_logged_in(self):
         wd = self.app.wd
-        return len(wd.find_elements_by_link_text("Logout")) > 0
+        return wd.current_url.endswith("/login_page.php")
 
 
     def is_logged_in_as(self, username):
