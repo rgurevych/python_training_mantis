@@ -24,18 +24,16 @@ class SessionHelper:
 
 
     def ensure_logout(self):
-        wd = self.app.wd
         if self.is_logged_in():
             self.logout()
 
 
     def is_logged_in(self):
         wd = self.app.wd
-        return wd.current_url.endswith("/login_page.php")
+        return not wd.current_url.endswith("/login_page.php")
 
 
     def is_logged_in_as(self, username):
-        wd = self.app.wd
         return self.get_logged_username() == username
 
 
@@ -45,10 +43,11 @@ class SessionHelper:
 
 
     def ensure_login(self, username, password):
-        wd = self.app.wd
+        self.app.open_app_page()
         if self.is_logged_in():
             if self.is_logged_in_as(username):
                 return
             else:
                 self.logout()
-        self.login(username, password)
+        else:
+            self.login(username, password)

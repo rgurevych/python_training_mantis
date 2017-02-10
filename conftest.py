@@ -24,7 +24,6 @@ def app(request):
     credentials = loadconfig(request.config.getoption("--target"))["webadmin"]
     if fixture is None or not fixture.is_valid():
         fixture = Application(browser=browser, base_url=base_url)
-    #fixture.session.login(username=credentials["username"], password=credentials["password"])
     fixture.session.ensure_login(username=credentials["username"], password=credentials["password"])
     return fixture
 
