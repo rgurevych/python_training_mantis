@@ -54,4 +54,4 @@ class ProjectHelper:
 
     def random_name(self):
         sym = string.ascii_letters + string.digits + " "*10
-        return re.sub('\s+', ' ', ("".join([random.choice(sym) for i in range(random.randrange(20))]).rstrip()))
+        return re.sub('\s+', ' ', ("".join([random.choice(sym) for i in range(random.randint(3, 20))]).rstrip()))

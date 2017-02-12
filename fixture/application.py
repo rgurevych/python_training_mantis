@@ -2,10 +2,11 @@ from selenium import webdriver
 from selenium.webdriver.firefox.firefox_binary import FirefoxBinary
 from fixture.session import SessionHelper
 from fixture.project import ProjectHelper
+from fixture.james import JamesHelper
 
 class Application:
 
-    def __init__(self, browser, base_url):
+    def __init__(self, browser, config):
         if browser == "chrome":
             self.wd = webdriver.Chrome()
         elif browser == "firefox":
@@ -18,7 +19,9 @@ class Application:
             raise ValueError("Unknown browser: %s" % browser)
         self.session = SessionHelper(self)
         self.project = ProjectHelper(self)
-        self.base_url = base_url
+        self.james = JamesHelper(self)
+        self.base_url = config["web"]["baseURL"]
+        self.config = config
 
 
     def is_valid(self):
