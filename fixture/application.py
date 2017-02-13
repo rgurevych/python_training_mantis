@@ -3,6 +3,8 @@ from selenium.webdriver.firefox.firefox_binary import FirefoxBinary
 from fixture.session import SessionHelper
 from fixture.project import ProjectHelper
 from fixture.james import JamesHelper
+from fixture.signup import SignupHelper
+from fixture.mail import MailHelper
 
 class Application:
 
@@ -20,6 +22,8 @@ class Application:
         self.session = SessionHelper(self)
         self.project = ProjectHelper(self)
         self.james = JamesHelper(self)
+        self.signup = SignupHelper(self)
+        self.mail = MailHelper(self)
         self.base_url = config["web"]["baseURL"]
         self.config = config
 

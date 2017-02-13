@@ -1,4 +1,6 @@
 from telnetlib import Telnet
+import random
+import string
 
 class JamesHelper:
 
@@ -15,6 +17,11 @@ class JamesHelper:
         else:
             session.create_user(username, password)
         session.quit()
+
+
+    def random_username(self):
+        sym = string.ascii_letters
+        return "".join([random.choice(sym) for i in range(random.randint(3, 20))])
 
 
     class Session:
@@ -48,4 +55,5 @@ class JamesHelper:
 
         def quit(self):
             self.write("quit\n")
-            #self.telnet.read_until("Connection to host lost", 5)
+
+
